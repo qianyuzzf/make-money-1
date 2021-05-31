@@ -2,6 +2,7 @@ import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router';
 import Money from '@/views/Money.vue';
 import Labels from '@/views/Labels.vue';
 import Statistics from '@/views/Statistics.vue';
+import Notfound from '@/views/Notfound.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -22,6 +23,10 @@ const routes: Array<RouteRecordRaw> = [
     path: '/statistics',
     name: 'statistics',
     component: Statistics
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: Notfound
   }
 ];
 
