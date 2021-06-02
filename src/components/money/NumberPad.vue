@@ -25,7 +25,7 @@ import {defineComponent, ref} from 'vue';
 
 export default defineComponent({
   name: 'NumberPad',
-  setup() {
+  setup(props, context) {
     const output = ref('0');
     const inputContent = (event: MouseEvent) => {
       const button = event.target as HTMLButtonElement;
@@ -47,7 +47,8 @@ export default defineComponent({
       output.value += input;
     };
     const ok = () => {
-      console.log('ok');
+      context.emit('update:value', output.value);
+      output.value = '0';
     };
     const remove = () => {
       const index = output.value.length;

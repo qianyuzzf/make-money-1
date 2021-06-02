@@ -1,25 +1,28 @@
 <template>
   <ul class="types">
-    <li :class="{selected:type==='-'}" @click="selectType('-')">支出</li>
-    <li :class="{selected:type==='+'}" @click="selectType('+')">收入</li>
+    <li :class="{selected:value==='-'}" @click="selectType('-')">支出</li>
+    <li :class="{selected:value==='+'}" @click="selectType('+')">收入</li>
   </ul>
 </template>
 
 <script lang="ts">
-import {ref, defineComponent} from 'vue';
+import {defineComponent} from 'vue';
 
 export default defineComponent({
   name: 'Types',
-  setup() {
-    const type = ref<string>('-');  //'-'代表支出,'+'代表收入
+  props: {
+    value: {
+      type: String,
+      default: '-'
+    }
+  },
+  setup(props, context) {
     const selectType = (data: string) => {
-      if (data !== '+' && data !== '-') {
-        throw new Error('type error');
-      } else {
-        type.value = data;
+      if (data !== props.value) {
+        context.emit('update:value', data);
       }
     };
-    return {type, selectType};
+    return {selectType};
   }
 });
 </script>

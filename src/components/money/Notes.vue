@@ -6,12 +6,15 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from 'vue';
+import {defineComponent, ref, watch} from 'vue';
 
 export default defineComponent({
   name: 'Notes',
-  setup() {
+  setup(props, context) {
     const value = ref('');
+    watch(value, (value) => {
+      context.emit('update:value', value);
+    });
     return {value};
   }
 });

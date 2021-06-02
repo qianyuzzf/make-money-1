@@ -32,6 +32,7 @@ export default defineComponent({
       } else {
         selectedTags.value.push(tag);
       }
+      context.emit('update:value', Array.from(selectedTags.value));
     };
     const create = () => {
       const name = window.prompt('请输入标签名:');
