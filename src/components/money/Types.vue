@@ -1,14 +1,27 @@
 <template>
   <ul class="types">
-    <li class="selected">支出</li>
-    <li>收入</li>
+    <li :class="{selected:type==='-'}" @click="selectType('-')">支出</li>
+    <li :class="{selected:type==='+'}" @click="selectType('+')">收入</li>
   </ul>
 </template>
 
 <script lang="ts">
-export default {
-  name: 'Types'
-};
+import {ref, defineComponent} from 'vue';
+
+export default defineComponent({
+  name: 'Types',
+  setup() {
+    const type = ref<string>('-');  //'-'代表支出,'+'代表收入
+    const selectType = (data: string) => {
+      if (data !== '+' && data !== '-') {
+        throw new Error('type error');
+      } else {
+        type.value = data;
+      }
+    };
+    return {type, selectType};
+  }
+});
 </script>
 
 <style lang="scss" scoped>
