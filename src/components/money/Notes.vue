@@ -1,15 +1,19 @@
 <template>
   <label class="notes">
     <span class="name">备注</span>
-    <input type="text" placeholder="请输入备注信息">
+    <input v-model="value" type="text" placeholder="请输入备注信息">
   </label>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, ref} from 'vue';
 
 export default defineComponent({
-  name: 'Notes'
+  name: 'Notes',
+  setup() {
+    const value = ref('');
+    return {value};
+  }
 });
 </script>
 
