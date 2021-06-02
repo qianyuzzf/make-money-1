@@ -1,15 +1,15 @@
 <template>
   <Layout class-prefix="layout">
-    <NumberPad @update:value="onUpdateMoney"/>
+    <NumberPad @update:value="onUpdateMoney" @submit="saveRecord"/>
     <Types v-model:value="record.type"/>
     <Notes @update:value="onUpdateNotes"/>
     <Tags v-model:data-source="tags" @update:value="onUpdateTags"/>
-    {{ record }}
+    {{ recordList }}
   </Layout>
 </template>
 
 <script lang="ts">
-import {ref, defineComponent} from 'vue';
+import {ref, defineComponent, watch} from 'vue';
 import Layout from '@/components/Layout.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import Types from '@/components/money/Types.vue';
@@ -20,7 +20,8 @@ type Record = {
   money: number,
   type: string,
   notes: string,
-  tags: string[]
+  tags: string[],
+  time?: Date
 }
 
 export default defineComponent({
@@ -40,8 +41,12 @@ export default defineComponent({
       notes: '',
       tags: []
     });
+    const recordList = ref<Record[]>(
+        window.localStorage.getItem('record') ?
+            JSON.parse(window.localStorage.getItem('record') as string) :
+            []
+    );
     const onUpdateTags = (data: string[]) => {
-      // record.value.tags = JSON.parse(JSON.stringify(data));
       record.value.tags = data;
     };
     const onUpdateMoney = (data: string) => {
@@ -50,12 +55,21 @@ export default defineComponent({
     const onUpdateNotes = (data: string) => {
       record.value.notes = data;
     };
+    const saveRecord = () => {
+      record.value.time = new Date();
+      recordList.value.push(JSON.parse(JSON.stringify(record.value)));
+    };
+    watch(recordList.value, () => {
+      window.localStorage.setItem('record', JSON.stringify(recordList.value));
+    });
     return {
       tags,
       onUpdateTags,
       onUpdateMoney,
       onUpdateNotes,
-      record
+      record,
+      saveRecord,
+      recordList
     };
   }
 });

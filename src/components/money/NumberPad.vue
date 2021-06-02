@@ -48,6 +48,7 @@ export default defineComponent({
     };
     const ok = () => {
       context.emit('update:value', output.value);
+      context.emit('submit', output.value);
       output.value = '0';
     };
     const remove = () => {
