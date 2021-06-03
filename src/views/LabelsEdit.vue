@@ -26,7 +26,8 @@ export default defineComponent({
     if (tag) {
       console.log(tag);
     } else {
-      router.push('/404');
+      console.log('/404');
+      // router.push('/404');
     }
   }
 });

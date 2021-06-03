@@ -1,12 +1,12 @@
 <template>
   <Layout>
     {{ tagsList }}
-    <ol class="tags">
-      <li v-for="tag in tagsList" :key="tag.name">
+    <div class="tags">
+      <router-link :to="`/labels/edit/${tag.id}`" v-for="tag in tagsList" :key="tag.name">
         <span>{{ tag.name }}</span>
         <Icon name="right"/>
-      </li>
-    </ol>
+      </router-link>
+    </div>
     <div class="createTag-wrapper">
       <button class="createTag" @click="createTag">新建标签</button>
     </div>
@@ -48,7 +48,7 @@ export default defineComponent({
   padding: 0 16px;
   background: white;
 
-  > li {
+  > a {
     font-size: 16px;
     min-height: 44px;
     display: flex;
