@@ -13,10 +13,13 @@ export default defineComponent({
   props: {
     placeholder: {
       type: String
+    },
+    data: {
+      type: String
     }
   },
   setup(props, context) {
-    const value = ref('');
+    const value = ref(props.data);
     watch(value, (value) => {
       context.emit('update:value', value);
     });
