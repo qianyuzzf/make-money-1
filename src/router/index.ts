@@ -3,6 +3,7 @@ import Money from '@/views/Money.vue';
 import Labels from '@/views/Labels.vue';
 import Statistics from '@/views/Statistics.vue';
 import Notfound from '@/views/Notfound.vue';
+import LabelsEdit from '@/views/LabelsEdit.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,6 +19,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/labels',
     name: 'labels',
     component: Labels
+  },
+  {
+    path: '/labels/edit',
+    name: 'labelsEdit',
+    component: LabelsEdit
   },
   {
     path: '/statistics',

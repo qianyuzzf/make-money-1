@@ -1,8 +1,9 @@
 <template>
   <Layout>
+    {{ tagsList }}
     <ol class="tags">
-      <li v-for="tag in tagsList" :key="tag">
-        <span>{{ tag }}</span>
+      <li v-for="tag in tagsList" :key="tag.name">
+        <span>{{ tag.name }}</span>
         <Icon name="right"/>
       </li>
     </ol>
@@ -17,20 +18,22 @@ import model from '@/models/model';
 import {defineComponent, ref} from 'vue';
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
+import {Tag} from '@/custom.ts';
 
 export default defineComponent({
   name: 'Labels',
   components: {Icon, Layout},
   setup() {
-    const tagsList = ref<string[]>(model.fetch('tagsList'));
+    const tagsList = ref<Tag[]>(model.fetch('tagsList'));
     const createTag = () => {
       const name = window.prompt('请输入标签名');
       if (name) {
-        if (tagsList.value.indexOf(name) >= 0) {
+        const index = tagsList.value.filter(item => item.name === name)[0];
+        if (index) {
           window.alert('标签名重复，请重新输入');
           return;
         }
-        tagsList.value.push(name);
+        tagsList.value.push({id: name, name: name});
         model.save('tagsList', tagsList.value);
         window.alert('添加成功');
       }

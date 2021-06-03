@@ -5,6 +5,7 @@
     <Notes @update:value="onUpdateNotes"/>
     <Tags v-model:data-source="tagsList" @update:value="onUpdateTags"/>
     {{ recordsList }}
+    {{ tagsList }}
   </Layout>
 </template>
 
@@ -15,7 +16,7 @@ import NumberPad from '@/components/money/NumberPad.vue';
 import Types from '@/components/money/Types.vue';
 import Notes from '@/components/money/Notes.vue';
 import Tags from '@/components/money/Tags.vue';
-import {RecordItem} from '@/custom.ts';
+import {RecordItem, Tag} from '@/custom.ts';
 import model from '@/models/model';
 
 export default defineComponent({
@@ -28,7 +29,7 @@ export default defineComponent({
     NumberPad
   },
   setup() {
-    const tagsList = ref<string[]>(model.fetch('tagsList'));
+    const tagsList = ref<Tag[]>(model.fetch('tagsList'));
     const record = ref<RecordItem>({
       money: 0,
       type: '-',

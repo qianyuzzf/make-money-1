@@ -6,3 +6,8 @@ export type RecordItem = {
   time?: Date
 }
 
+export type Tag = {
+  id: string,
+  name: string
+}
+

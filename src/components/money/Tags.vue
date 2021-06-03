@@ -4,10 +4,10 @@
       <button @click="create">新增标签</button>
     </div>
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag"
+      <li v-for="tag in dataSource" :key="tag.name"
           :class="{selected:selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)">
-        {{ tag }}
+        {{ tag.name }}
       </li>
     </ul>
   </div>
@@ -39,7 +39,7 @@ export default defineComponent({
       if (name === '') {
         window.alert('标签名不能为空');
       } else if (props.dataSource) {
-        context.emit('update:dataSource', [...props.dataSource, name]);
+        context.emit('update:dataSource', [...props.dataSource, {id: name, name: name}]);
       }
     };
     return {selectedTags, toggle, create};
