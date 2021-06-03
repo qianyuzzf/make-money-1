@@ -1,7 +1,7 @@
 <template>
   <label class="notes">
-    <span class="name">备注</span>
-    <input v-model="value" type="text" placeholder="请输入备注信息">
+    <span class="name"><slot/></span>
+    <input v-model="value" type="text" :placeholder="placeholder">
   </label>
 </template>
 
@@ -10,6 +10,11 @@ import {defineComponent, ref, watch} from 'vue';
 
 export default defineComponent({
   name: 'Notes',
+  props: {
+    placeholder: {
+      type: String
+    }
+  },
   setup(props, context) {
     const value = ref('');
     watch(value, (value) => {

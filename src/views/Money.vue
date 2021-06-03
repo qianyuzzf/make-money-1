@@ -2,7 +2,7 @@
   <Layout class-prefix="layout">
     <NumberPad @update:value="onUpdateMoney" @submit="saveRecord"/>
     <Types v-model:value="record.type"/>
-    <Notes @update:value="onUpdateNotes"/>
+    <Notes @update:value="onUpdateNotes" placeholder="请输入备注信息">备注</Notes>
     <Tags v-model:data-source="tagsList" @update:value="onUpdateTags"/>
     {{ recordsList }}
     {{ tagsList }}

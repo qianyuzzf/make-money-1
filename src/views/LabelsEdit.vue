@@ -1,8 +1,10 @@
 <template>
   <Layout>
     <div>
-      LabelsEdit
+      <Icon name="left"/>
+      <span>编辑标签</span>
     </div>
+    <Notes placeholder="请输入新标签名">标签名</Notes>
   </Layout>
 </template>
 
@@ -11,10 +13,12 @@ import Layout from '@/components/Layout.vue';
 import {defineComponent, ref} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import model from '@/models/model';
+import Icon from '@/components/Icon.vue';
+import Notes from '@/components/money/Notes.vue';
 
 export default defineComponent({
   name: 'LabelsEdit',
-  components: {Layout},
+  components: {Notes, Icon, Layout},
   setup() {
     const route = useRoute();  //获取路由信息
     const router = useRouter();  //执行路由操作
