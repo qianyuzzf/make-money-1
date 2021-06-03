@@ -4,7 +4,7 @@
       <button @click="create">新增标签</button>
     </div>
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag.name"
+      <li v-for="tag in dataSource" :key="tag.id"
           :class="{selected:selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)">
         {{ tag.name }}
@@ -15,6 +15,7 @@
 
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
+import createId from '@/lib/createId';
 
 export default defineComponent({
   name: 'Tags',
@@ -39,7 +40,7 @@ export default defineComponent({
       if (name === '') {
         window.alert('标签名不能为空');
       } else if (props.dataSource) {
-        context.emit('update:dataSource', [...props.dataSource, {id: name, name: name}]);
+        context.emit('update:dataSource', [...props.dataSource, {id: createId(), name}]);
       }
     };
     return {selectedTags, toggle, create};

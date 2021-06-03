@@ -34,7 +34,6 @@ export default defineComponent({
     const route = useRoute();  //获取路由信息
     const router = useRouter();  //执行路由操作
     const tagValue = ref({});
-    console.log(route.params.id);
     const id = route.params.id;
     const tagList = ref(model.fetch('tagsList'));
     const tag = tagList.value.filter(t => t.id === id)[0];

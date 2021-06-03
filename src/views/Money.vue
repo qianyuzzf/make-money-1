@@ -3,9 +3,9 @@
     <NumberPad @update:value="onUpdateMoney" @submit="saveRecord"/>
     <Types v-model:value="record.type"/>
     <FormItem @update:value="onUpdateNotes" placeholder="请输入备注信息">备注</FormItem>
-    <Tags v-model:data-source="tagsList" @update:value="onUpdateTags"/>
-    {{ recordsList }}
-    {{ tagsList }}
+    <Tags :data-source="tagsList"
+          @update:data-source="saveTags"
+          @update:value="onUpdateTags"/>
   </Layout>
 </template>
 
@@ -37,7 +37,7 @@ export default defineComponent({
       tags: []
     });
     const recordsList = ref<RecordItem[]>(model.fetch2('recordsList'));
-    const onUpdateTags = (data: string[]) => {
+    const onUpdateTags = (data: Tag[]) => {
       record.value.tags = data;
     };
     const onUpdateMoney = (data: string) => {
@@ -50,7 +50,12 @@ export default defineComponent({
       record.value.time = new Date();
       recordsList.value.push(model.clone(record.value));
     };
+    const saveTags = (data: Tag[]) => {
+      tagsList.value = data;
+      model.save('tagsList', tagsList.value);
+    };
     watch(recordsList.value, () => {
+      console.log(2);
       model.save('recordsList', recordsList.value);
     });
     return {
@@ -60,7 +65,8 @@ export default defineComponent({
       onUpdateNotes,
       record,
       saveRecord,
-      recordsList
+      recordsList,
+      saveTags
     };
   }
 });

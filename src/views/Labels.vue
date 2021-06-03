@@ -1,8 +1,9 @@
 <template>
   <Layout>
-    {{ tagsList }}
     <div class="tags">
-      <router-link :to="`/labels/edit/${tag.id}`" v-for="tag in tagsList" :key="tag.name">
+      <router-link :to="`/labels/edit/${tag.id}`"
+                   v-for="tag in tagsList"
+                   :key="tag.id">
         <span>{{ tag.name }}</span>
         <Icon class="rightIcon" name="right"/>
       </router-link>
@@ -27,17 +28,7 @@ export default defineComponent({
   setup() {
     const tagsList = ref<Tag[]>(model.fetch('tagsList'));
     const createTag = () => {
-      const name = window.prompt('请输入标签名');
-      if (name) {
-        const index = tagsList.value.filter(item => item.name === name)[0];
-        if (index) {
-          window.alert('标签名重复，请重新输入');
-          return;
-        }
-        tagsList.value.push({id: name, name: name});
-        model.save('tagsList', tagsList.value);
-        window.alert('添加成功');
-      }
+      model.saveTags('tagsList', tagsList.value);
     };
     return {tagsList, createTag};
   }

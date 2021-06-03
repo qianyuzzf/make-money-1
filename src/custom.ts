@@ -2,7 +2,7 @@ export type RecordItem = {
   money: number,
   type: string,
   notes: string,
-  tags: string[],
+  tags: Tag[],
   time?: Date
 }
 
