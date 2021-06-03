@@ -41,11 +41,7 @@ export default defineComponent({
       notes: '',
       tags: []
     });
-    const recordList = ref<Record[]>(
-        window.localStorage.getItem('record') ?
-            JSON.parse(window.localStorage.getItem('record') as string) :
-            []
-    );
+    const recordList = ref<Record[]>(JSON.parse(window.localStorage.getItem('record') || '[]'));
     const onUpdateTags = (data: string[]) => {
       record.value.tags = data;
     };
