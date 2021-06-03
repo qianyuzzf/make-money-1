@@ -3,8 +3,8 @@
     <NumberPad @update:value="onUpdateMoney" @submit="saveRecord"/>
     <Types v-model:value="record.type"/>
     <Notes @update:value="onUpdateNotes"/>
-    <Tags v-model:data-source="tags" @update:value="onUpdateTags"/>
-    {{ recordList }}
+    <Tags v-model:data-source="tagsList" @update:value="onUpdateTags"/>
+    {{ recordsList }}
   </Layout>
 </template>
 
@@ -15,14 +15,8 @@ import NumberPad from '@/components/money/NumberPad.vue';
 import Types from '@/components/money/Types.vue';
 import Notes from '@/components/money/Notes.vue';
 import Tags from '@/components/money/Tags.vue';
-
-type Record = {
-  money: number,
-  type: string,
-  notes: string,
-  tags: string[],
-  time?: Date
-}
+import {RecordItem} from '@/custom.ts';
+import model from '@/models/model';
 
 export default defineComponent({
   name: 'Money',
@@ -34,14 +28,14 @@ export default defineComponent({
     NumberPad
   },
   setup() {
-    const tags = ref<string[]>(['衣', '食', '住', '行']);
-    const record = ref<Record>({
+    const tagsList = ref<string[]>(model.fetch('tagsList'));
+    const record = ref<RecordItem>({
       money: 0,
       type: '-',
       notes: '',
       tags: []
     });
-    const recordList = ref<Record[]>(JSON.parse(window.localStorage.getItem('record') || '[]'));
+    const recordsList = ref<RecordItem[]>(model.fetch2('recordsList'));
     const onUpdateTags = (data: string[]) => {
       record.value.tags = data;
     };
@@ -53,19 +47,19 @@ export default defineComponent({
     };
     const saveRecord = () => {
       record.value.time = new Date();
-      recordList.value.push(JSON.parse(JSON.stringify(record.value)));
+      recordsList.value.push(model.clone(record.value));
     };
-    watch(recordList.value, () => {
-      window.localStorage.setItem('record', JSON.stringify(recordList.value));
+    watch(recordsList.value, () => {
+      model.save('recordsList', recordsList.value);
     });
     return {
-      tags,
+      tagsList,
       onUpdateTags,
       onUpdateMoney,
       onUpdateNotes,
       record,
       saveRecord,
-      recordList
+      recordsList
     };
   }
 });

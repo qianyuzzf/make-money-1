@@ -1,37 +1,43 @@
 <template>
   <Layout>
     <ol class="tags">
-      <li>
-        <span>衣</span>
-        <Icon name="right"/>
-      </li>
-      <li>
-        <span>食</span>
-        <Icon name="right"/>
-      </li>
-      <li>
-        <span>住</span>
-        <Icon name="right"/>
-      </li>
-      <li>
-        <span>行</span>
+      <li v-for="tag in tagsList" :key="tag">
+        <span>{{ tag }}</span>
         <Icon name="right"/>
       </li>
     </ol>
     <div class="createTag-wrapper">
-      <button class="createTag">新建标签</button>
+      <button class="createTag" @click="createTag">新建标签</button>
     </div>
   </Layout>
 </template>
 
 <script lang="ts">
+import model from '@/models/model';
+import {defineComponent, ref} from 'vue';
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
 
-export default {
+export default defineComponent({
   name: 'Labels',
-  components: {Icon, Layout}
-};
+  components: {Icon, Layout},
+  setup() {
+    const tagsList = ref<string[]>(model.fetch('tagsList'));
+    const createTag = () => {
+      const name = window.prompt('请输入标签名');
+      if (name) {
+        if (tagsList.value.indexOf(name) >= 0) {
+          window.alert('标签名重复，请重新输入');
+          return;
+        }
+        tagsList.value.push(name);
+        model.save('tagsList', tagsList.value);
+        window.alert('添加成功');
+      }
+    };
+    return {tagsList, createTag};
+  }
+});
 </script>
 
 <style lang="scss" scoped>
