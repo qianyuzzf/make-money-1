@@ -1,5 +1,5 @@
 <template>
-  <label class="notes">
+  <label class="formItem">
     <span class="name"><slot/></span>
     <input v-model="value" type="text" :placeholder="placeholder">
   </label>
@@ -9,7 +9,7 @@
 import {defineComponent, ref, watch} from 'vue';
 
 export default defineComponent({
-  name: 'Notes',
+  name: 'FormItem',
   props: {
     placeholder: {
       type: String
@@ -26,10 +26,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.notes {
+.formItem {
   font-size: 14px;
   padding-left: 16px;
-  background: #f5f5f5;
   display: flex;
   align-items: center;
 

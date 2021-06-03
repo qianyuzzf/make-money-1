@@ -4,11 +4,11 @@
     <div class="tags">
       <router-link :to="`/labels/edit/${tag.id}`" v-for="tag in tagsList" :key="tag.name">
         <span>{{ tag.name }}</span>
-        <Icon name="right"/>
+        <Icon class="rightIcon" name="right"/>
       </router-link>
     </div>
     <div class="createTag-wrapper">
-      <button class="createTag" @click="createTag">新建标签</button>
+      <Button @click="createTag">新建标签</Button>
     </div>
   </Layout>
 </template>
@@ -19,10 +19,11 @@ import {defineComponent, ref} from 'vue';
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
 import {Tag} from '@/custom.ts';
+import Button from '@/components/Button.vue';
 
 export default defineComponent({
   name: 'Labels',
-  components: {Icon, Layout},
+  components: {Button, Icon, Layout},
   setup() {
     const tagsList = ref<Tag[]>(model.fetch('tagsList'));
     const createTag = () => {
@@ -55,19 +56,16 @@ export default defineComponent({
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #e6e6e6;
+
+    > .rightIcon {
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 
-.createTag {
-  border: none;
-  background: #767676;
-  color: white;
-  border-radius: 4px;
-  padding: 10px 16px;
-
-  &-wrapper {
-    text-align: center;
-    padding-top: 32px;
-  }
+.createTag-wrapper {
+  text-align: center;
+  padding-top: 32px;
 }
 </style>

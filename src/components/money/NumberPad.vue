@@ -77,6 +77,7 @@ export default defineComponent({
     font-family: Consolas, monospace;
     padding: 9px 16px;
     text-align: right;
+    background: white;
   }
 
   > .buttons {

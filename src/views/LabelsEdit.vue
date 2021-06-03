@@ -1,10 +1,16 @@
 <template>
   <Layout>
-    <div>
-      <Icon name="left"/>
-      <span>编辑标签</span>
+    <div class="navBar">
+      <Icon class="leftIcon" name="left"/>
+      <span class="title">编辑标签</span>
+      <span class="rightIcon"></span>
     </div>
-    <FormItem placeholder="请输入新标签名">标签名</FormItem>
+    <div class="formWrapper">
+      <FormItem placeholder="请输入新的标签名">标签名</FormItem>
+    </div>
+    <div class="buttonWrapper">
+      <Button>删除标签</Button>
+    </div>
   </Layout>
 </template>
 
@@ -15,10 +21,11 @@ import {useRoute, useRouter} from 'vue-router';
 import model from '@/models/model';
 import Icon from '@/components/Icon.vue';
 import FormItem from '@/components/money/FormItem.vue';
+import Button from '@/components/Button.vue';
 
 export default defineComponent({
   name: 'LabelsEdit',
-  components: {FormItem, Icon, Layout},
+  components: {Button, FormItem, Icon, Layout},
   setup() {
     const route = useRoute();  //获取路由信息
     const router = useRouter();  //执行路由操作
@@ -36,5 +43,37 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.navBar {
+  background: white;
+  font-size: 16px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > .leftIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  > .title {
+
+  }
+
+  > .rightIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.formWrapper {
+  background: white;
+  margin-top: 10px;
+}
+
+.buttonWrapper {
+  text-align: center;
+  padding-top: 32px;
+}
 
 </style>
