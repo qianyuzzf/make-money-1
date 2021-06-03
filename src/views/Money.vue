@@ -2,7 +2,7 @@
   <Layout class-prefix="layout">
     <NumberPad @update:value="onUpdateMoney" @submit="saveRecord"/>
     <Types v-model:value="record.type"/>
-    <Notes @update:value="onUpdateNotes" placeholder="请输入备注信息">备注</Notes>
+    <FormItem @update:value="onUpdateNotes" placeholder="请输入备注信息">备注</FormItem>
     <Tags v-model:data-source="tagsList" @update:value="onUpdateTags"/>
     {{ recordsList }}
     {{ tagsList }}
@@ -14,7 +14,7 @@ import {ref, defineComponent, watch} from 'vue';
 import Layout from '@/components/Layout.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import Types from '@/components/money/Types.vue';
-import Notes from '@/components/money/Notes.vue';
+import FormItem from '@/components/money/FormItem.vue';
 import Tags from '@/components/money/Tags.vue';
 import {RecordItem, Tag} from '@/custom.ts';
 import model from '@/models/model';
@@ -24,7 +24,7 @@ export default defineComponent({
   components: {
     Layout,
     Tags,
-    Notes,
+    FormItem,
     Types,
     NumberPad
   },
