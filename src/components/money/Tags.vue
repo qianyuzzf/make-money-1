@@ -43,24 +43,16 @@ export default defineComponent({
         return;
       }
       if (name) {
-        const xxx = (props.dataSource as Tag[]);
-        const index = xxx.filter(item => item.name === name)[0];
+        const tags = (props.dataSource as Tag[]);
+        const index = tags.filter(item => item.name === name)[0];
         if (index) {
           window.alert('标签名重复，请重新输入');
           return;
         }
-        xxx.push({id: createId(), name});
-        context.emit('update:dataSource', xxx);
+        tags.push({id: createId(), name});
+        context.emit('update:dataSource', tags);
         window.alert('添加成功');
       }
-
-
-      // const name = window.prompt('请输入标签名:');
-      // if (name === '') {
-      //   window.alert('标签名不能为空');
-      // } else if (props.dataSource) {
-      //   context.emit('update:dataSource', [...props.dataSource, {id: createId(), name}]);
-      // }
     };
     return {selectedTags, toggle, create};
   }

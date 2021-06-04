@@ -39,6 +39,8 @@ export default defineComponent({
 .tags {
   padding: 0 16px;
   background: white;
+  max-height: 70vh;
+  overflow: auto;
 
   > a {
     font-size: 16px;
