@@ -16,6 +16,10 @@ const model = {
   },
   saveTags(path: string, data: Tag[]): void {
     const name = window.prompt('请输入标签名');
+    if (name === '') {
+      window.alert('标签名不能为空');
+      return;
+    }
     if (name) {
       const index = data.filter(item => item.name === name)[0];
       if (index) {
