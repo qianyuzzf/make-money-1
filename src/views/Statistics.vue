@@ -8,7 +8,7 @@
           :data-source="intervalList"/>
     <ol class="content">
       <li v-for="(group,index) in showResult()" :key="index">
-        <h3 class="title">{{ index }}</h3>
+        <h3 class="title">{{ changeDate(index) }}</h3>
         <ol>
           <li v-for="item in group" :key="item.time"
               class="record">
@@ -29,6 +29,7 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
 import model from '@/models/model';
 import {RecordItem} from '@/custom';
+import dayjs from 'dayjs';
 
 export default defineComponent({
   name: 'Statistics',
@@ -56,6 +57,20 @@ export default defineComponent({
       }
       return hashTable;
     };
+    const changeDate = (date: string) => {
+      const now = dayjs();
+      if (dayjs(date).isSame(now, 'day')) {
+        return '今天';
+      } else if (dayjs(date).isSame(now.subtract(1, 'day'), 'day')) {
+        return '昨天';
+      } else if (dayjs(date).isSame(now.subtract(2, 'day'), 'day')) {
+        return '前天';
+      } else if (dayjs(date).isSame(now, 'year')) {
+        return dayjs(date).format('MM月DD日');
+      } else {
+        return dayjs(date).format('YYYY年MM月DD日');
+      }
+    };
     return {
       typeList,
       intervalList,
@@ -63,7 +78,8 @@ export default defineComponent({
       type,
       result,
       result2,
-      showResult
+      showResult,
+      changeDate
     };
   }
 });
