@@ -1,14 +1,10 @@
 <template>
-  <ul class="types">
-    <li :class="{selected:value==='-',
-        [classPrefix+'-item']:classPrefix}"
-        @click="selectType('-')">
-      支出
-    </li>
-    <li :class="{selected:value==='+',
-        [classPrefix+'-item']:classPrefix}"
-        @click="selectType('+')">
-      收入
+  <ul class="tabs">
+    <li v-for="item in dataSource" :key="item.value"
+        @click="select(item.value)"
+        :class="{selected:item.value===value,
+        [classPrefix+'-tabs-item']:classPrefix}">
+      {{ item.text }}
     </li>
   </ul>
 </template>
@@ -17,29 +13,31 @@
 import {defineComponent} from 'vue';
 
 export default defineComponent({
-  name: 'Types',
+  name: 'Tabs',
   props: {
     value: {
-      type: String,
-      default: '-'
+      type: String
     },
     classPrefix: {
       type: String
+    },
+    dataSource: {
+      type: Array
     }
   },
   setup(props, context) {
-    const selectType = (data: string) => {
+    const select = (data: string) => {
       if (data !== props.value) {
         context.emit('update:value', data);
       }
     };
-    return {selectType};
+    return {select};
   }
 });
 </script>
 
 <style lang="scss" scoped>
-.types {
+.tabs {
   display: flex;
   background: #c4c4c4;
   font-size: 24px;
