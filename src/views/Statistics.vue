@@ -38,8 +38,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-::v-deep li.interval-tabs-item,
-::v-deep li.type-tabs-item {
+::v-deep li.type-tabs-item,
+::v-deep li.interval-tabs-item {
   background: white;
 
   &.selected {
@@ -51,5 +51,9 @@ export default defineComponent({
   }
 }
 
+::v-deep li.interval-tabs-item {
+  padding: 5px 0;
+  font-size: 20px;
+}
 
 </style>
