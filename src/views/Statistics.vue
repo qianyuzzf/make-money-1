@@ -18,15 +18,13 @@
 import Layout from '@/components/Layout.vue';
 import {defineComponent, ref} from 'vue';
 import Tabs from '@/components/Tabs.vue';
+import recordTypeList from '@/constants/recordTypeList';
 
 export default defineComponent({
   name: 'Statistics',
   components: {Tabs, Layout},
   setup() {
-    const typeList = ref([
-      {text: '支出', value: '-'},
-      {text: '收入', value: '+'}
-    ]);
+    const typeList = ref(recordTypeList);
     const intervalList = ref([
       {text: '按天', value: 'day'},
       {text: '按周', value: 'week'},

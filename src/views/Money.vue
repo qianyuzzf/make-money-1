@@ -1,7 +1,7 @@
 <template>
   <Layout class-prefix="layout">
     <NumberPad @update:value="onUpdateMoney" @submit="saveRecord"/>
-    <Types v-model:value="record.type"/>
+    <Tabs v-model:value="record.type" :data-source="typeList"/>
     <FormItem @update:value="onUpdateNotes" placeholder="请输入备注信息">备注</FormItem>
     <Tags :data-source="tagsList"
           @update:data-source="saveTags"
@@ -13,19 +13,20 @@
 import {ref, defineComponent, watch} from 'vue';
 import Layout from '@/components/Layout.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
-import Types from '@/components/money/Types.vue';
 import FormItem from '@/components/money/FormItem.vue';
 import Tags from '@/components/money/Tags.vue';
 import {RecordItem, Tag} from '@/custom.ts';
 import model from '@/models/model';
+import Tabs from '@/components/Tabs.vue';
+import recordTypeList from '@/constants/recordTypeList';
 
 export default defineComponent({
   name: 'Money',
   components: {
+    Tabs,
     Layout,
     Tags,
     FormItem,
-    Types,
     NumberPad
   },
   setup() {
@@ -36,6 +37,7 @@ export default defineComponent({
       notes: '',
       tags: []
     });
+    const typeList = ref(recordTypeList);
     const recordsList = ref<RecordItem[]>(model.fetch2('recordsList'));
     const onUpdateTags = (data: Tag[]) => {
       record.value.tags = data;
@@ -66,7 +68,8 @@ export default defineComponent({
       record,
       saveRecord,
       recordsList,
-      saveTags
+      saveTags,
+      typeList
     };
   }
 });
