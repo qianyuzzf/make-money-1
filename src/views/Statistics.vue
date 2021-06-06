@@ -7,14 +7,17 @@
           v-model:value="interval"
           :data-source="intervalList"/>
     <ol class="content">
-      <li v-for="(group,index) in showResult()" :key="index">
-        <h3 class="title">{{ changeDate(index) }}</h3>
+      <li v-for="group in showResult()" :key="group.title">
+        <h3 class="title">
+          <span>{{ changeDate(group.title) }}</span>
+          <span>￥{{ group.total }}</span>
+        </h3>
         <ol>
-          <li v-for="item in group" :key="item.time"
+          <li v-for="(item,index) in group.items" :key="index"
               class="record">
-            <span>{{ item.tags.join(',') || '无无无无无无无无无无无无无无无无无无无无无无无无无' }}</span>
-            <span class="notes">￥无无无无无无无无无无无无无无无无无无无无无无无无{{ item.notes }}</span>
-            <span>￥无无无无无无无无无无无无无无无无无无无无无无无无{{ item.money }}</span>
+            <span>{{ item.tags.map(i => i.name).join(',') || '无' }}</span>
+            <span class="notes">{{ item.notes }}</span>
+            <span>￥{{ item.money }}</span>
           </li>
         </ol>
       </li>
@@ -28,7 +31,6 @@ import {defineComponent, ref} from 'vue';
 import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
 import model from '@/models/model';
-import {RecordItem} from '@/custom';
 import dayjs from 'dayjs';
 
 export default defineComponent({
@@ -46,16 +48,24 @@ export default defineComponent({
     const result = ref(model.fetch('tagsList'));
     const result2 = ref(model.fetch2('recordsList'));
     const showResult = () => {
-      const hashTable: { [key: string]: RecordItem[] } = {};
-      for (let i = 0; i < result2.value.length; i++) {
-        const time = result2.value[i].time;
-        if (time) {
-          const [data] = time.toString().split('T');
-          hashTable[data] = hashTable[data] || [];
-          hashTable[data].push(result2.value[i]);
+      if (result2.value.length === 0) {
+        return [];
+      }
+      const selectType = model.clone(result2.value).filter(r => r.type === type.value);
+      if (!selectType[0]) {
+        return [];
+      }
+      const result = selectType.sort((a, b) => dayjs(b.time).valueOf() - dayjs(a.time).valueOf());
+      const hashArray = [{title: result[0].time, items: [result[0]], total: 0}];
+      for (let i = 1; i < result.length; i++) {
+        if (dayjs(result[i].time).isSame(dayjs(result[hashArray.length - 1].time), 'day')) {
+          hashArray[hashArray.length - 1].items.push(result[i]);
+        } else {
+          hashArray.push({title: result[i].time, items: [result[i]], total: 0});
         }
       }
-      return hashTable;
+      hashArray.forEach(group => group.total = group.items.reduce((sum, item) => sum + item.money, 0));
+      return hashArray;
     };
     const changeDate = (date: string) => {
       const now = dayjs();
@@ -109,6 +119,9 @@ export default defineComponent({
 
   .title {
     padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .record {

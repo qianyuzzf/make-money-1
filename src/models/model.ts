@@ -11,7 +11,7 @@ const model = {
   save(name: string, data: RecordItem[] | Tag[]): void {
     window.localStorage.setItem(name, JSON.stringify(data));
   },
-  clone(data: RecordItem): RecordItem {
+  clone<T>(data: T): T {
     return JSON.parse(JSON.stringify(data));
   },
   saveTags(path: string, data: Tag[]): void {

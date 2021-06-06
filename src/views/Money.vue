@@ -57,7 +57,6 @@ export default defineComponent({
       model.save('tagsList', tagsList.value);
     };
     watch(recordsList.value, () => {
-      console.log(2);
       model.save('recordsList', recordsList.value);
     });
     return {
