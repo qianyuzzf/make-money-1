@@ -16,12 +16,18 @@ export default defineComponent({
     },
     data: {
       type: String
+    },
+    initValue: {
+      type: Boolean
     }
   },
   setup(props, context) {
     const value = ref(props.data);
     watch(value, (value) => {
       context.emit('update:value', value);
+    });
+    watch(() => props.initValue, () => {
+      value.value = '';
     });
     return {value};
   }

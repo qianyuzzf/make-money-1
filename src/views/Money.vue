@@ -2,7 +2,11 @@
   <Layout class-prefix="layout">
     <NumberPad @update:value="onUpdateMoney" @submit="saveRecord"/>
     <Tabs v-model:value="record.type" :data-source="typeList"/>
-    <FormItem @update:value="onUpdateNotes" placeholder="请输入备注信息">备注</FormItem>
+    <FormItem :init-value="initNoteValue"
+              @update:value="onUpdateNotes"
+              placeholder="请输入备注信息">
+      备注
+    </FormItem>
     <Tags :data-source="tagsList"
           @update:data-source="saveTags"
           @update:value="onUpdateTags"/>
@@ -31,6 +35,7 @@ export default defineComponent({
     NumberPad
   },
   setup() {
+    const initNoteValue = ref(false);
     const tagsInit = () => {
       const tags = model.fetch('tagsList').length === 0 ?
           [
@@ -68,6 +73,7 @@ export default defineComponent({
         record.value.time = new Date().toISOString();
         recordsList.value.push(model.clone(record.value));
         window.alert('保存成功');
+        initNoteValue.value = !initNoteValue.value;
       }
     };
     const saveTags = (data: Tag[]) => {
@@ -86,7 +92,8 @@ export default defineComponent({
       saveRecord,
       recordsList,
       saveTags,
-      typeList
+      typeList,
+      initNoteValue
     };
   }
 });
