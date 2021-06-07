@@ -15,7 +15,7 @@
         <ol>
           <li v-for="(item,index) in group.items" :key="index"
               class="record">
-            <span>{{ item.tags.map(i => i.name).join(',') || '无' }}</span>
+            <span>{{ item.tags.map(i => i.name).join('，') || '无' }}</span>
             <span class="notes">{{ item.notes }}</span>
             <span>￥{{ item.money }}</span>
           </li>

@@ -19,6 +19,7 @@ import {RecordItem, Tag} from '@/custom.ts';
 import model from '@/models/model';
 import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
+import createId from '@/lib/createId';
 
 export default defineComponent({
   name: 'Money',
@@ -30,7 +31,19 @@ export default defineComponent({
     NumberPad
   },
   setup() {
-    const tagsList = ref<Tag[]>(model.fetch('tagsList'));
+    const tagsInit = () => {
+      const tags = model.fetch('tagsList').length === 0 ?
+          [
+            {id: createId(), name: '衣'},
+            {id: createId(), name: '食'},
+            {id: createId(), name: '住'},
+            {id: createId(), name: '行'}
+          ] :
+          model.fetch('tagsList');
+      model.save('tagsList', tags);
+      return tags;
+    };
+    const tagsList = ref<Tag[]>(tagsInit());
     const record = ref<RecordItem>({
       money: 0,
       type: '-',
@@ -49,8 +62,9 @@ export default defineComponent({
       record.value.notes = data;
     };
     const saveRecord = () => {
-      record.value.time = new Date();
+      record.value.time = new Date().toISOString();
       recordsList.value.push(model.clone(record.value));
+      window.alert('保存成功');
     };
     const saveTags = (data: Tag[]) => {
       tagsList.value = data;

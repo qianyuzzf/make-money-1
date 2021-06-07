@@ -47,9 +47,13 @@ export default defineComponent({
       output.value += input;
     };
     const ok = () => {
-      context.emit('update:value', output.value);
-      context.emit('submit', output.value);
-      output.value = '0';
+      if (output.value === '0') {
+        window.alert('金额不能为零');
+      } else {
+        context.emit('update:value', output.value);
+        context.emit('submit', output.value);
+        output.value = '0';
+      }
     };
     const remove = () => {
       const index = output.value.length;
