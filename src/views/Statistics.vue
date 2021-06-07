@@ -6,7 +6,7 @@
     <Tabs class-prefix="interval"
           v-model:value="interval"
           :data-source="intervalList"/>
-    <ol class="content">
+    <ol class="content" v-if="showResult().length>0">
       <li v-for="group in showResult()" :key="group.title">
         <h3 class="title">
           <span>{{ changeDate(group.title) }}</span>
@@ -22,6 +22,9 @@
         </ol>
       </li>
     </ol>
+    <div v-else>
+      <span>页面不存在</span>
+    </div>
   </Layout>
 </template>
 
@@ -48,9 +51,6 @@ export default defineComponent({
     const result = ref(model.fetch('tagsList'));
     const result2 = ref(model.fetch2('recordsList'));
     const showResult = () => {
-      if (result2.value.length === 0) {
-        return [];
-      }
       const selectType = model.clone(result2.value).filter(r => r.type === type.value);
       if (!selectType[0]) {
         return [];

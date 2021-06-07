@@ -62,9 +62,13 @@ export default defineComponent({
       record.value.notes = data;
     };
     const saveRecord = () => {
-      record.value.time = new Date().toISOString();
-      recordsList.value.push(model.clone(record.value));
-      window.alert('保存成功');
+      if (record.value.tags.length === 0) {
+        window.alert('请至少选择一个标签');
+      } else {
+        record.value.time = new Date().toISOString();
+        recordsList.value.push(model.clone(record.value));
+        window.alert('保存成功');
+      }
     };
     const saveTags = (data: Tag[]) => {
       tagsList.value = data;
