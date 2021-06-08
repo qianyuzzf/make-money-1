@@ -1,5 +1,9 @@
 <template>
-  <label class="formItem">
+  <label class="formItem" v-if="formItemType==='date'">
+    <span class="name"><slot/></span>
+    <input v-model="value2" type="date">
+  </label>
+  <label class="formItem" v-else>
     <span class="name"><slot/></span>
     <input v-model="value" type="text" :placeholder="placeholder">
   </label>
@@ -7,6 +11,7 @@
 
 <script lang="ts">
 import {defineComponent, ref, watch} from 'vue';
+import dayjs from 'dayjs';
 
 export default defineComponent({
   name: 'FormItem',
@@ -19,17 +24,25 @@ export default defineComponent({
     },
     initValue: {
       type: Boolean
+    },
+    formItemType: {
+      type: String
     }
   },
   setup(props, context) {
     const value = ref(props.data);
+    const value2 = ref(props.data);
     watch(value, (value) => {
       context.emit('update:value', value);
     });
     watch(() => props.initValue, () => {
       value.value = '';
+      value2.value = dayjs().format('YYYY-MM-DD');
     });
-    return {value};
+    watch(value2, (value) => {
+      context.emit('update:value2', value);
+    });
+    return {value, value2};
   }
 });
 </script>

@@ -7,6 +7,12 @@
               placeholder="请输入备注信息">
       备注
     </FormItem>
+    <FormItem :init-value="initNoteValue"
+              @update:value2="onUpdateNotes2"
+              formItemType="date"
+              :data="nowDate">
+      日期
+    </FormItem>
     <Tags :data-source="tagsList"
           @update:data-source="saveTags"
           @update:value="onUpdateTags"/>
@@ -24,6 +30,7 @@ import model from '@/models/model';
 import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
 import createId from '@/lib/createId';
+import dayjs from 'dayjs';
 
 export default defineComponent({
   name: 'Money',
@@ -35,6 +42,7 @@ export default defineComponent({
     NumberPad
   },
   setup() {
+    const nowDate = dayjs().format('YYYY-MM-DD');
     const initNoteValue = ref(false);
     const tagsInit = () => {
       const tags = model.fetch('tagsList').length === 0 ?
@@ -66,12 +74,14 @@ export default defineComponent({
     const onUpdateNotes = (data: string) => {
       record.value.notes = data;
     };
+    const onUpdateNotes2 = (data: string) => {
+      record.value.time = data;
+    };
     const saveRecord = () => {
       if (record.value.tags.length === 0) {
         window.alert('请至少选择一个标签');
       } else {
-        record.value.time = new Date().toISOString();
-        recordsList.value.push(model.clone(record.value));
+        recordsList.value.unshift(model.clone(record.value));
         window.alert('保存成功');
         initNoteValue.value = !initNoteValue.value;
       }
@@ -88,12 +98,14 @@ export default defineComponent({
       onUpdateTags,
       onUpdateMoney,
       onUpdateNotes,
+      onUpdateNotes2,
       record,
       saveRecord,
       recordsList,
       saveTags,
       typeList,
-      initNoteValue
+      initNoteValue,
+      nowDate
     };
   }
 });
