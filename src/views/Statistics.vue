@@ -6,6 +6,7 @@
     <Tabs class-prefix="interval"
           v-model:value="interval"
           :data-source="intervalList"/>
+    <Chart/>
     <ol class="content" v-if="showResult().length>0">
       <li v-for="group in showResult()" :key="group.title">
         <h3 class="title">
@@ -35,10 +36,11 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
 import model from '@/models/model';
 import dayjs from 'dayjs';
+import Chart from '@/components/Chart.vue';
 
 export default defineComponent({
   name: 'Statistics',
-  components: {Tabs, Layout},
+  components: {Chart, Tabs, Layout},
   setup() {
     const typeList = ref(recordTypeList);
     const intervalList = ref([
