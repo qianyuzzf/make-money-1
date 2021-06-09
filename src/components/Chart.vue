@@ -27,19 +27,31 @@ export default defineComponent({
   setup(props) {
     const xAxisData = ref<string[]>([]);
     const seriesData = ref<number[]>([]);
+
     const updateValue = () => {
       if (props.result) {
         const sortResult = model.clone(props.result as Result[]);
         sortResult.sort((a, b) => a.title < b.title ? -1 : 1);
         xAxisData.value = sortResult.slice(-30).map(i => dayjs(i.title).format('MM-DD'));
         seriesData.value = sortResult.slice(-30).map(i => i.total);
+        return xAxisData.value.length;
       }
     };
-    updateValue();
+    const dataSize = (wrapper: HTMLDivElement, main: HTMLDivElement, width: number) => {
+      const length = updateValue();
+      if (length) {
+        main.style.width = `${width / 7 * length}px`;
+        main.style.height = `${width}px`;
+      }
+      wrapper.scrollLeft = wrapper.scrollWidth;
+    };
+
     onMounted(() => {
       const wrapper = document.querySelector('.wrapper') as HTMLDivElement;
-      wrapper.scrollLeft = wrapper.scrollWidth;
-      const myChart = echarts.init(document.querySelector('.main') as HTMLDivElement);
+      const main = document.querySelector('.main') as HTMLDivElement;
+      const width = document.documentElement.clientWidth;
+      dataSize(wrapper, main, width);
+      const myChart = echarts.init(main);
       const option = {
         grid: {
           left: 20,
@@ -77,7 +89,10 @@ export default defineComponent({
         }]
       };
       myChart.setOption(option);
+
       watch(() => props.result, () => {
+        dataSize(wrapper, main, width);
+        myChart.resize();
         updateValue();
         const option = {
           xAxis: {
@@ -101,11 +116,6 @@ export default defineComponent({
 
   &::-webkit-scrollbar {
     display: none;
-  }
-
-  .main {
-    width: 430vw;
-    height: 100vw;
   }
 }
 </style>
