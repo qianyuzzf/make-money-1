@@ -6,7 +6,7 @@
     <Tabs class-prefix="interval"
           v-model:value="interval"
           :data-source="intervalList"/>
-    <Chart/>
+    <Chart :result="showResult()"/>
     <ol class="content" v-if="showResult().length>0">
       <li v-for="group in showResult()" :key="group.title">
         <h3 class="title">
@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import Layout from '@/components/Layout.vue';
-import {defineComponent, ref} from 'vue';
+import {defineComponent, ref, watch} from 'vue';
 import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
 import model from '@/models/model';
@@ -83,6 +83,10 @@ export default defineComponent({
         return dayjs(date).format('YYYY年MM月DD日');
       }
     };
+    const chartsData = ref(showResult());
+    watch(type, () => {
+      chartsData.value = showResult();
+    });
     return {
       typeList,
       intervalList,
@@ -91,7 +95,8 @@ export default defineComponent({
       result,
       result2,
       showResult,
-      changeDate
+      changeDate,
+      chartsData
     };
   }
 });

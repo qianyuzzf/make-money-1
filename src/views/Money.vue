@@ -81,6 +81,7 @@ export default defineComponent({
       if (record.value.tags.length === 0) {
         window.alert('请至少选择一个标签');
       } else {
+        record.value.time = record.value.time || dayjs().format('YYYY-MM-DD');
         recordsList.value.unshift(model.clone(record.value));
         window.alert('保存成功');
         initNoteValue.value = !initNoteValue.value;
