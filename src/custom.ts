@@ -3,7 +3,7 @@ export type RecordItem = {
   type: string,
   notes: string,
   tags: Tag[],
-  time: string
+  time?: string
 }
 
 export type Tag = {

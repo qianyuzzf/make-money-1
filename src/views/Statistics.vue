@@ -60,7 +60,7 @@ export default defineComponent({
       const result = selectType.sort((a, b) => dayjs(b.time).valueOf() - dayjs(a.time).valueOf());
       const hashArray = [{title: result[0].time, items: [result[0]], total: 0}];
       for (let i = 1; i < result.length; i++) {
-        if (dayjs(result[i].time).isSame(dayjs(result[hashArray.length - 1].time), 'day')) {
+        if (dayjs(result[i].time).isSame(dayjs(hashArray[hashArray.length - 1].title), 'day')) {
           hashArray[hashArray.length - 1].items.push(result[i]);
         } else {
           hashArray.push({title: result[i].time, items: [result[i]], total: 0});
