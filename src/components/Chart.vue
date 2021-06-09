@@ -34,6 +34,11 @@ export default defineComponent({
         sortResult.sort((a, b) => a.title < b.title ? -1 : 1);
         xAxisData.value = sortResult.slice(-30).map(i => dayjs(i.title).format('MM-DD'));
         seriesData.value = sortResult.slice(-30).map(i => i.total);
+        let surplusLength = 7 - xAxisData.value.length;
+        for (let i = 0; i < surplusLength; i++) {
+          xAxisData.value.unshift('');
+          seriesData.value.unshift(0);
+        }
         return xAxisData.value.length;
       }
     };
@@ -60,7 +65,8 @@ export default defineComponent({
         },
         tooltip: {
           show: true,
-          formatter: '{b}<br/>{c}',
+          confine: true,
+          formatter: '{b}<br/>￥{c}',
           position: 'top',
           backgroundColor: '#666',
           textStyle: {
