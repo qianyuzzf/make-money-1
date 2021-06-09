@@ -3,9 +3,6 @@
     <Tabs class-prefix="type"
           v-model:value="type"
           :data-source="typeList"/>
-    <Tabs class-prefix="interval"
-          v-model:value="interval"
-          :data-source="intervalList"/>
     <Chart :result="showResult()"/>
     <ol class="content" v-if="showResult().length>0">
       <li v-for="group in showResult()" :key="group.title">
@@ -23,8 +20,8 @@
         </ol>
       </li>
     </ol>
-    <div v-else>
-      <span>页面不存在</span>
+    <div v-else class="no-data-wrapper">
+      <span class="no-data">亲，目前还没有数据呢</span>
     </div>
   </Layout>
 </template>
@@ -43,12 +40,6 @@ export default defineComponent({
   components: {Chart, Tabs, Layout},
   setup() {
     const typeList = ref(recordTypeList);
-    const intervalList = ref([
-      {text: '按天', value: 'day'},
-      {text: '按周', value: 'week'},
-      {text: '按月', value: 'month'}
-    ]);
-    const interval = ref('day');
     const type = ref('-');
     const result = ref(model.fetch('tagsList'));
     const result2 = ref(model.fetch2('recordsList'));
@@ -89,8 +80,6 @@ export default defineComponent({
     });
     return {
       typeList,
-      intervalList,
-      interval,
       type,
       result,
       result2,
@@ -103,8 +92,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-::v-deep(li.type-tabs-item),
-::v-deep(li.interval-tabs-item), {
+.no-data {
+
+  &-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+  }
+}
+
+::v-deep(li.type-tabs-item) {
   background: white;
 
   &.selected {
@@ -114,11 +111,6 @@ export default defineComponent({
       display: none;
     }
   }
-}
-
-::v-deep(li.interval-tabs-item) {
-  padding: 5px 0;
-  font-size: 20px;
 }
 
 .content {
