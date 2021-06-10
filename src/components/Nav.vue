@@ -32,9 +32,14 @@ nav {
   display: flex;
   flex-direction: row;
   font-size: 14px;
+  background: #f5f5f5;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
   > a {
-    padding: 2px 0;
+    padding: 6px 0 2px 0;
     width: 33.3333%;
     display: flex;
     flex-direction: column;

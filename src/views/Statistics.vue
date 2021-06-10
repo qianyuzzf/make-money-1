@@ -122,7 +122,7 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: white;
+    background: #fefefe;
     padding: 6px 16px;
     border-bottom: 1px solid #e6e6e6;
 

@@ -38,7 +38,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .tags {
   padding: 0 16px;
-  background: white;
+  background: #fefefe;
   max-height: 70vh;
   overflow: auto;
 

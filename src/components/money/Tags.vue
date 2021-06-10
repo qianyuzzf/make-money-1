@@ -1,8 +1,5 @@
 <template>
   <div class="tags">
-    <div class="new">
-      <button @click="create">新增标签</button>
-    </div>
     <ul class="current">
       <li v-for="tag in dataSource" :key="tag.id"
           :class="{selected:selectedTags.indexOf(tag)>=0}"
@@ -11,6 +8,9 @@
         <span>{{ tag.name }}</span>
       </li>
     </ul>
+    <div class="new">
+      <button @click="create">新增标签</button>
+    </div>
   </div>
 </template>
 
@@ -67,11 +67,11 @@ export default defineComponent({
 
 .tags {
   font-size: 14px;
-  padding: 16px 0 16px 16px;
+  padding: 4px 0 16px 16px;
   flex-grow: 1;
   display: flex;
-  flex-direction: column-reverse;
-  background: white;
+  flex-direction: column;
+  background: #fefefe;
   overflow: auto;
 
   > .current {
