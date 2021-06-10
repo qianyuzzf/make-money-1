@@ -1,9 +1,9 @@
 <template>
   <Layout>
+    <Chart :result="showResult()"/>
     <Tabs class-prefix="type"
           v-model:value="type"
           :data-source="typeList"/>
-    <Chart :result="showResult()"/>
     <ol class="content" v-if="showResult().length>0">
       <li v-for="group in showResult()" :key="group.title">
         <h3 class="title">
@@ -98,18 +98,6 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     padding-top: 80px;
-  }
-}
-
-::v-deep(li.type-tabs-item) {
-  background: white;
-
-  &.selected {
-    background: #c4c4c4;
-
-    &::after {
-      display: none;
-    }
   }
 }
 

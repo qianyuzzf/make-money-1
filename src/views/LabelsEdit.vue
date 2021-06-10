@@ -36,9 +36,15 @@ export default defineComponent({
     const tagValue = ref({});
     const id = route.params.id;
     const tagList = ref(model.fetch('tagsList'));
+    const tagListClone = model.clone(tagList.value);
     const tag = tagList.value.filter(t => t.id === id)[0];
     if (tag) {
       tagValue.value = tag;
+      for (let i = 0; i < tagListClone.length; i++) {
+        if (tag.name === tagListClone[i].name) {
+          tagListClone.splice(i, 1);
+        }
+      }
     } else {
       router.push('/404');
     }
@@ -56,7 +62,17 @@ export default defineComponent({
       }
     };
     const goBack = () => {
-      router.push('/labels');
+      if (tag.name === '') {
+        window.alert('标签名不能为空');
+        return;
+      }
+      const repeat = tagListClone.filter(item => item.name === tag.name)[0];
+      if (repeat) {
+        window.alert('标签名重复，请重新输入');
+        return;
+      } else {
+        router.push('/labels');
+      }
     };
     return {tagValue, onUpdateValue, remove, goBack};
   }

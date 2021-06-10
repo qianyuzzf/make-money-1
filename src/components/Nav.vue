@@ -42,7 +42,7 @@ nav {
     align-items: center;
 
     &.selected {
-      color: $color-heightLight;
+      color: $sure-button-bg;
     }
 
     > .icon {

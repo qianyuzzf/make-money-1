@@ -81,7 +81,7 @@ export default defineComponent({
     > li {
       background: #dbd9db;
       padding: 8px;
-      margin: 12px 12px 0 0;
+      margin: 12px 16px 0 0;
       border-radius: 4px;
       display: flex;
       flex-direction: column;

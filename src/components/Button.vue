@@ -13,12 +13,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/styles/helper.scss";
+
 .button {
   border: none;
-  background: #767676;
-  color: white;
-  border-radius: 4px;
-  padding: 10px 16px;
+  background: $sure-button-bg;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 16px;
 
   &-wrapper {
     text-align: center;

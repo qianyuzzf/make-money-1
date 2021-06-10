@@ -9,7 +9,9 @@ app.mount('#app');
 
 window.onload = function () {
   setTimeout(() => {
-    window.scroll(0, 100);
+    const scroll = document.documentElement.scrollHeight;
+    console.log(scroll);
+    window.scroll(0, scroll);
   }, 0);
 };
 

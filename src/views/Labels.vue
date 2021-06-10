@@ -9,7 +9,7 @@
       </router-link>
     </div>
     <div class="createTag-wrapper">
-      <Button @click="createTag">新建标签</Button>
+      <Button @click="createTag">新增标签</Button>
     </div>
   </Layout>
 </template>

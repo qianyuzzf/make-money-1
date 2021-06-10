@@ -27,7 +27,7 @@ export default defineComponent({
     border: none;
     background: $sure-button-bg;
     color: $sure-button-color;
-    margin: 56px 0;
+    margin: 32px 0;
     padding: 8px 80px;
     border-radius: 40px;
   }
