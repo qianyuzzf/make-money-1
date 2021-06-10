@@ -16,4 +16,13 @@ body {
   background: #f5f5f5;
 }
 
+#app {
+  @media (min-width: 500px) {
+    width: 500px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 </style>
