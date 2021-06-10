@@ -80,6 +80,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/styles/helper.scss";
+
 .navBar {
   background: white;
   font-size: 16px;
@@ -91,10 +93,6 @@ export default defineComponent({
   > .leftIcon {
     width: 20px;
     height: 20px;
-  }
-
-  > .title {
-
   }
 
   > .rightIcon {
@@ -111,6 +109,10 @@ export default defineComponent({
 .buttonWrapper {
   text-align: center;
   padding-top: 32px;
+}
+
+.buttonWrapper ::v-deep(.button) {
+  background: $danger-button;
 }
 
 </style>

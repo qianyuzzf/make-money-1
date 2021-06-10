@@ -68,7 +68,7 @@ export default defineComponent({
           confine: true,
           formatter: '{b}<br/>￥{c}',
           position: 'top',
-          backgroundColor: '#666',
+          backgroundColor: '#ff7070',
           textStyle: {
             color: '#eee'
           }
@@ -88,7 +88,7 @@ export default defineComponent({
           symbol: 'circle',
           symbolSize: 10,
           itemStyle: {
-            color: '#666'
+            color: '#ff7070'
           },
           data: Array.from(seriesData.value),
           type: 'line'
