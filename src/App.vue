@@ -1,5 +1,7 @@
 <template>
-  <router-view/>
+  <transition name="fade" mode="out-in">
+    <router-view/>
+  </transition>
 </template>
 
 <style lang="scss">
@@ -24,5 +26,16 @@ body {
     transform: translateX(-50%);
   }
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s linear;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 
 </style>
