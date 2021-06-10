@@ -51,7 +51,7 @@ export default defineComponent({
     watch(() => props.initValue, () => {
       value.value = '';
       value2.value = dayjs().format('YYYY-MM-DD');
-      value3.value = props.placeholder;
+      value3.value = '';
     });
     return {value, value2, value3};
   }

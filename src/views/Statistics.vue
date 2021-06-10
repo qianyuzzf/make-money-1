@@ -12,7 +12,8 @@
         </h3>
         <ol>
           <li v-for="(item,index) in group.items" :key="index"
-              class="record">
+              class="record"
+              @click="toggle(index)" :class="{selected:selectNumber===index}">
             <span>{{ item.tags.map(i => i.name).join('，') || '无' }}</span>
             <span class="notes">{{ item.notes }}</span>
             <span>￥{{ item.money }}</span>
@@ -39,6 +40,10 @@ export default defineComponent({
   name: 'Statistics',
   components: {Chart, Tabs, Layout},
   setup() {
+    const selectNumber = ref(-1);
+    const toggle = (index: number) => {
+      selectNumber.value >= 0 ? selectNumber.value = -1 : selectNumber.value = index;
+    };
     const typeList = ref(recordTypeList);
     const type = ref('-');
     const result = ref(model.fetch('tagsList'));
@@ -85,7 +90,9 @@ export default defineComponent({
       result2,
       showResult,
       changeDate,
-      chartsData
+      chartsData,
+      toggle,
+      selectNumber
     };
   }
 });
@@ -126,9 +133,18 @@ export default defineComponent({
       white-space: nowrap;
 
       &.notes {
+        flex-grow: 1;
         margin-right: auto;
         margin-left: 10px;
         color: #999999;
+      }
+    }
+
+    &.selected {
+      > span {
+        overflow: auto;
+        text-overflow: clip;
+        white-space: pre-wrap;
       }
     }
   }

@@ -46,7 +46,7 @@ export default defineComponent({
       const length = updateValue();
       if (length) {
         main.style.width = `${width / 7 * length}px`;
-        main.style.height = `${width}px`;
+        main.style.height = `${width * 0.8}px`;
       }
       wrapper.scrollLeft = wrapper.scrollWidth;
     };
