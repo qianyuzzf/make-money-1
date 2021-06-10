@@ -37,27 +37,24 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/styles/helper.scss";
+
 .tabs {
   display: flex;
-  background: #c4c4c4;
-  font-size: 24px;
+  font-size: 20px;
+  padding: 12px 64px;
   text-align: center;
 
   > li {
     width: 50%;
-    padding: 10px 0;
+    padding: 4px 0;
     position: relative;
+    border-radius: 8px;
+    background: #dbd9db;
 
     &.selected {
-      &::after {
-        content: '';
-        width: 100%;
-        height: 4px;
-        bottom: 0;
-        left: 0;
-        background: #333333;
-        position: absolute;
-      }
+      background: $sure-button-bg;
+      color: $sure-button-color;
     }
   }
 }
