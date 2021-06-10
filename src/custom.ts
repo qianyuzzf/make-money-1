@@ -8,6 +8,7 @@ export type RecordItem = {
 
 export type Tag = {
   id: string,
-  name: string
+  name: string,
+  content: string
 }
 

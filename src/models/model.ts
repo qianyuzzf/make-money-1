@@ -26,7 +26,7 @@ const model = {
         window.alert('标签名重复，请重新输入');
         return;
       }
-      data.push({id: createId(), name: name});
+      data.push({id: createId(), name, content: 'custom'});
       model.save(path, data);
       window.alert('添加成功');
     }
