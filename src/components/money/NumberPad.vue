@@ -87,7 +87,7 @@ export default defineComponent({
   > .buttons {
     display: grid;
     grid-template-columns: repeat(4, 25%);
-    grid-template-rows: repeat(4, 64px);
+    grid-template-rows: repeat(4, 56px);
 
     > button {
       $bg: #f2f2f2;

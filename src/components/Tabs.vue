@@ -45,7 +45,7 @@ export default defineComponent({
 
   > li {
     width: 50%;
-    padding: 14px 0;
+    padding: 10px 0;
     position: relative;
 
     &.selected {
