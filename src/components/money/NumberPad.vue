@@ -25,9 +25,9 @@ export default defineComponent({
   > .ok {
     @extend %transformCenter;
     border: none;
-    background: $sure-button;
-    color: #fff;
-    margin-top: 56px;
+    background: $sure-button-bg;
+    color: $sure-button-color;
+    margin: 56px 0;
     padding: 8px 80px;
     border-radius: 40px;
   }

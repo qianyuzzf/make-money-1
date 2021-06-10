@@ -64,6 +64,7 @@ export default defineComponent({
   padding-left: 16px;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #ccc;
 
   > .name {
     padding-right: 16px;
