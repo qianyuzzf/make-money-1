@@ -1,6 +1,8 @@
 import createId from '@/lib/createId';
 
 const hashArray = [
+  {id: createId(), name: '工资', content: 'salary'},
+  {id: createId(), name: '奖金', content: 'money'},
   {id: createId(), name: '饮食', content: 'diet'},
   {id: createId(), name: '衣服', content: 'clothes'},
   {id: createId(), name: '日用', content: 'dayUse'},

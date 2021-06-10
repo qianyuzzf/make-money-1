@@ -67,19 +67,20 @@ export default defineComponent({
 
 .tags {
   font-size: 14px;
-  padding: 16px;
+  padding: 16px 0 16px 16px;
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
   background: white;
+  overflow: auto;
 
   > .current {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 
     > li {
       background: #dbd9db;
-      padding: 8px 16px;
+      padding: 8px;
       margin: 12px 12px 0 0;
       border-radius: 4px;
       display: flex;
@@ -95,6 +96,21 @@ export default defineComponent({
       &.selected {
         background: $sure-button-bg;
         color: $sure-button-color;
+
+        > .icon {
+          animation: scaleIcon 250ms 2;
+          @keyframes scaleIcon {
+            0% {
+              transform: scale(1.0);
+            }
+            50% {
+              transform: scale(1.2);
+            }
+            100% {
+              transform: scale(1.0);
+            }
+          }
+        }
       }
     }
   }
