@@ -7,7 +7,8 @@
       <li v-for="tag in dataSource" :key="tag.id"
           :class="{selected:selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)">
-        {{ tag.name }}
+        <Icon :name="tag.content"/>
+        <span>{{ tag.name }}</span>
       </li>
     </ul>
   </div>
@@ -17,9 +18,11 @@
 import {defineComponent, ref} from 'vue';
 import createId from '@/lib/createId';
 import {Tag} from '@/custom';
+import Icon from '@/components/Icon.vue';
 
 export default defineComponent({
   name: 'Tags',
+  components: {Icon},
   props: {
     dataSource: {
       type: Array
@@ -60,6 +63,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/styles/helper.scss";
+
 .tags {
   font-size: 14px;
   padding: 16px;
@@ -73,20 +78,23 @@ export default defineComponent({
     flex-wrap: wrap;
 
     > li {
-      $h: 24px;
-      $bg: #dbd9db;
-      background: $bg;
-      height: $h;
-      padding: 0 16px;
-      margin: 4px 12px 0 0;
-      border-radius: $h/2;
+      background: #dbd9db;
+      padding: 8px 16px;
+      margin: 12px 12px 0 0;
+      border-radius: 4px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
 
+      > .icon {
+        width: 32px;
+        height: 32px;
+      }
+
       &.selected {
-        background: darken($bg, 50%);
-        color: #dbd9db;
+        background: $sure-button-bg;
+        color: $sure-button-color;
       }
     }
   }
