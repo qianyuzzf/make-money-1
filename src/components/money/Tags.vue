@@ -76,7 +76,7 @@ export default defineComponent({
 
   > .current {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 25%);
 
     > li {
       background: #dbd9db;
@@ -87,6 +87,12 @@ export default defineComponent({
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      max-height: 80px;
+
+      > span {
+        max-width: 80%;
+        overflow: hidden;
+      }
 
       > .icon {
         width: 32px;

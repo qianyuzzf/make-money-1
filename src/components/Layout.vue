@@ -1,9 +1,9 @@
 <template>
   <div class="layout-wrapper" :class="classPrefix && `${classPrefix}-wrapper`">
+    <Nav/>
     <div class="content" :class="classPrefix && `${classPrefix}-content`">
       <slot/>
     </div>
-    <Nav/>
   </div>
 </template>
 

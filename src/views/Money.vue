@@ -18,10 +18,10 @@
               :data="nowDate">
       日期
     </FormItem>
-    <Tabs v-model:value="record.type" :data-source="typeList"/>
     <Tags :data-source="tagsList"
           @update:data-source="saveTags"
           @update:value="onUpdateTags"/>
+    <Tabs v-model:value="record.type" :data-source="typeList"/>
   </Layout>
 </template>
 
