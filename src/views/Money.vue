@@ -1,7 +1,12 @@
 <template>
   <Layout class-prefix="layout">
-    <NumberPad @update:value="onUpdateMoney" @submit="saveRecord"/>
-    <Tabs v-model:value="record.type" :data-source="typeList"/>
+    <NumberPad @submit="saveRecord"/>
+    <FormItem :init-value="initNoteValue"
+              @update:value3="onUpdateNotes3"
+              formItemType="money"
+              placeholder="请输入金额">
+      金额
+    </FormItem>
     <FormItem :init-value="initNoteValue"
               @update:value="onUpdateNotes"
               placeholder="请输入备注信息">
@@ -13,6 +18,7 @@
               :data="nowDate">
       日期
     </FormItem>
+    <Tabs v-model:value="record.type" :data-source="typeList"/>
     <Tags :data-source="tagsList"
           @update:data-source="saveTags"
           @update:value="onUpdateTags"/>
@@ -68,18 +74,21 @@ export default defineComponent({
     const onUpdateTags = (data: Tag[]) => {
       record.value.tags = data;
     };
-    const onUpdateMoney = (data: string) => {
-      record.value.money = parseFloat(data);
-    };
     const onUpdateNotes = (data: string) => {
       record.value.notes = data;
     };
     const onUpdateNotes2 = (data: string) => {
       record.value.time = data;
     };
+    const onUpdateNotes3 = (data: string) => {
+      console.log(data);
+      record.value.money = parseFloat(data);
+    };
     const saveRecord = () => {
       if (record.value.tags.length === 0) {
         window.alert('请至少选择一个标签');
+      } else if (record.value.money === 0) {
+        window.alert('金额数不能为零或者为空');
       } else {
         record.value.time = record.value.time || dayjs().format('YYYY-MM-DD');
         recordsList.value.unshift(model.clone(record.value));
@@ -97,9 +106,9 @@ export default defineComponent({
     return {
       tagsList,
       onUpdateTags,
-      onUpdateMoney,
       onUpdateNotes,
       onUpdateNotes2,
+      onUpdateNotes3,
       record,
       saveRecord,
       recordsList,
