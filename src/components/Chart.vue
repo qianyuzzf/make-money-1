@@ -54,6 +54,7 @@ export default defineComponent({
     onMounted(() => {
       const wrapper = document.querySelector('.wrapper') as HTMLDivElement;
       const main = document.querySelector('.main') as HTMLDivElement;
+      main.removeAttribute('_echarts_instance_');
       const app = document.querySelector('#app');
       if (app) {
         const width = app.clientWidth;

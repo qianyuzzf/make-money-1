@@ -1213,9 +1213,9 @@
     "@types/node" "*"
 
 "@types/echarts@^4.9.7":
-  version "4.9.7"
-  resolved "https://registry.nlark.com/@types/echarts/download/@types/echarts-4.9.7.tgz?cache=0&sync_timestamp=1621240917724&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fecharts%2Fdownload%2F%40types%2Fecharts-4.9.7.tgz#4437fb503111f5b1ed7961e7b95c7ed09a4844a3"
-  integrity sha1-RDf7UDER9bHteWHnuVx+0JpIRKM=
+  version "4.9.8"
+  resolved "https://registry.nlark.com/@types/echarts/download/@types/echarts-4.9.8.tgz?cache=0&sync_timestamp=1623209621072&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fecharts%2Fdownload%2F%40types%2Fecharts-4.9.8.tgz#a69779ca4755eb29b61387af4e15ec324623f866"
+  integrity sha1-ppd5ykdV6ym2E4evThXsMkYj+GY=
   dependencies:
     "@types/zrender" "*"
 
@@ -4202,12 +4202,12 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 echarts@^5.1.1:
-  version "5.1.1"
-  resolved "https://registry.nlark.com/echarts/download/echarts-5.1.1.tgz#b186f162f017c555cfd67b12ede6762bdc3ddfda"
-  integrity sha1-sYbxYvAXxVXP1nsS7eZ2K9w939o=
+  version "5.1.2"
+  resolved "https://registry.nlark.com/echarts/download/echarts-5.1.2.tgz#aa1ab0cef5b74fa2f7c620261a5f286893d30fd1"
+  integrity sha1-qhqwzvW3T6L3xiAmGl8oaJPTD9E=
   dependencies:
     tslib "2.0.3"
-    zrender "5.1.0"
+    zrender "5.1.1"
 
 editorconfig@^0.15.3:
   version "0.15.3"
@@ -10546,8 +10546,8 @@ tsconfig@^7.0.0:
 
 tslib@2.0.3:
   version "2.0.3"
-  resolved "https://registry.npmjs.org/tslib/-/tslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
-  integrity sha512-uZtkfKblCEQtZKBF6EBXVZeQNl82yqtDQdv+eck8u7tdPxjLu2/lp5/uPW+um2tpuxINHWy3GhiccY7QgEaVHQ==
+  resolved "https://registry.npm.taobao.org/tslib/download/tslib-2.0.3.tgz?cache=0&sync_timestamp=1617647281845&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
+  integrity sha1-jgdBrEX8DCJuWKF7/D5kubxsphw=
 
 tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
@@ -11614,9 +11614,9 @@ yorkie@^2.0.0:
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
 
-zrender@5.1.0:
-  version "5.1.0"
-  resolved "https://registry.npmjs.org/zrender/-/zrender-5.1.0.tgz#b6a84c3aa7ccc6642ee0519901ca4c0835c4d85e"
-  integrity sha512-c+8VRx52ycbmqwHeHLlo/BAfIHBl/JZNLM6cfDQFgzIH05yb+f5J9F/fbRsP+zGc8dW9XHuhdt8/iqukgMZSeg==
+zrender@5.1.1:
+  version "5.1.1"
+  resolved "https://registry.nlark.com/zrender/download/zrender-5.1.1.tgz#0515f4f8cc0f4742f02a6b8819550a6d13d64c5c"
+  integrity sha1-BRX0+MwPR0LwKmuIGVUKbRPWTFw=
   dependencies:
     tslib "2.0.3"
