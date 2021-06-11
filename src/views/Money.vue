@@ -76,7 +76,6 @@ export default defineComponent({
       record.value.time = data;
     };
     const onUpdateNotes3 = (data: string) => {
-      console.log(data);
       record.value.money = parseFloat(data);
     };
     const saveRecord = () => {

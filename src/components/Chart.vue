@@ -54,62 +54,64 @@ export default defineComponent({
     onMounted(() => {
       const wrapper = document.querySelector('.wrapper') as HTMLDivElement;
       const main = document.querySelector('.main') as HTMLDivElement;
-      const width = document.documentElement.clientWidth;
-      dataSize(wrapper, main, width);
-      const myChart = echarts.init(main);
-      const option = {
-        grid: {
-          left: 20,
-          right: 20,
-          bottom: 40
-        },
-        tooltip: {
-          show: true,
-          confine: true,
-          formatter: '{b}<br/>￥{c}',
-          position: 'top',
-          backgroundColor: '#ff7070',
-          textStyle: {
-            color: '#eee'
-          }
-        },
-        xAxis: {
-          axisTick: {
-            alignWithLabel: true
-          },
-          type: 'category',
-          data: Array.from(xAxisData.value)
-        },
-        yAxis: {
-          show: false,
-          type: 'value'
-        },
-        series: [{
-          symbol: 'circle',
-          symbolSize: 10,
-          itemStyle: {
-            color: '#ff7070'
-          },
-          data: Array.from(seriesData.value),
-          type: 'line'
-        }]
-      };
-      myChart.setOption(option);
-
-      watch(() => props.result, () => {
+      const app = document.querySelector('#app');
+      if (app) {
+        const width = app.clientWidth;
         dataSize(wrapper, main, width);
-        myChart.resize();
-        updateValue();
+        const myChart = echarts.init(main);
         const option = {
+          grid: {
+            left: 20,
+            right: 20,
+            bottom: 40
+          },
+          tooltip: {
+            show: true,
+            confine: true,
+            formatter: '{b}<br/>￥{c}',
+            position: 'top',
+            backgroundColor: '#ff7070',
+            textStyle: {
+              color: '#eee'
+            }
+          },
           xAxis: {
+            axisTick: {
+              alignWithLabel: true
+            },
+            type: 'category',
             data: Array.from(xAxisData.value)
           },
+          yAxis: {
+            show: false,
+            type: 'value'
+          },
           series: [{
-            data: Array.from(seriesData.value)
+            symbol: 'circle',
+            symbolSize: 10,
+            itemStyle: {
+              color: '#ff7070'
+            },
+            data: Array.from(seriesData.value),
+            type: 'line'
           }]
         };
         myChart.setOption(option);
-      });
+        watch(() => props.result, () => {
+          dataSize(wrapper, main, width);
+          myChart.resize();
+          updateValue();
+          const option = {
+            xAxis: {
+              data: Array.from(xAxisData.value)
+            },
+            series: [{
+              data: Array.from(seriesData.value)
+            }]
+          };
+          myChart.setOption(option);
+        });
+      }
     });
   }
 });
